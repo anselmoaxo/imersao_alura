@@ -107,3 +107,15 @@ dados = {
 df_analise = pd.DataFrame(dados)
 df_analise.to_excel('data/analise.xlsx', index=False)
 # %%
+df_principal_subiu = df_principal[condicao_subiu]
+df_principal_subiu
+# %%
+
+df_analise_segmento = df_principal_subiu.groupby('Segmento')['variacao_rs'].sum().reset_index()
+df_analise_segmento
+
+# %%
+df_analise_saldo = df_principal.groupby('Resultado')['variacao_rs'].sum().reset_index()
+df_analise_saldo
+
+# %%
