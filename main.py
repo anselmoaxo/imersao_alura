@@ -119,3 +119,26 @@ df_analise_saldo = df_principal.groupby('Resultado')['variacao_rs'].sum().reset_
 df_analise_saldo
 
 # %%
+import plotly.express as px
+# %%
+df_analise_saldo['variacao_rs_formatado'] = df_analise_saldo['variacao_rs'].apply(lambda x: '{:,.2f}'.format(x))
+
+fig = px.bar(df_analise_saldo, x='Resultado', y='variacao_rs_formatado',
+             text='variacao_rs_formatado', title='Variações R$ por Resultado',
+             width=800, height=600)
+fig.show()
+# %%
+
+fig = px.pie(df_analise_segmento, values='variacao_rs',
+             names='Segmento', title='Gafico - Analise Segmento',
+             width=800, height=600)
+# %%
+fig.show()
+# %%
+df_analise_cat_idade = df_principal.groupby('cat_idade')['variacao_rs'].sum().reset_index()
+df_analise_cat_idade
+
+fig = px.bar(df_analise_cat_idade, x='cat_idade', y='variacao_rs', text='variacao_rs', title='Variação Reais por Categoria de Idade',
+             width=800, height=600)
+fig.show()
+# %%
